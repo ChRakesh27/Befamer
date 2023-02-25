@@ -1,0 +1,150 @@
+<div id="LandLord">
+  <div class="container">
+
+    <div class="header-text">
+
+      <h1 class="username">HELLO {{UserName | uppercase}}</h1>
+      <h1>GET BEST PRICE IN 5 MINUTES</h1>
+    </div>
+    <br>
+    <br>
+    <span class="profile-role-tagline">
+      Knack of building applications with front and back end
+      operations.
+    </span>
+
+  </div>
+  <button type="button" class="landBtn" (click)="updatePopup('block')">Give Land</button>
+</div>
+
+<!-- ------------------------ Modal Box ------------------------- -->
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+  <div class="modal-dialog" role="document">
+    
+    <div class="modal-content">
+      <form [formGroup]="cartform">
+      <div class="modal-header">
+         <h4 class="modal-title">Land:</h4>
+        </div>
+      <div class="modal-body">
+        <p>Acre:</p>
+        <input type='text' class="land" placeholder="Enter Acre " formControlName="area">
+        <p>Soil(Type):</p>
+        <select class="form-select" aria-label="Default select example" formControlName="soil">
+          <option selected>Open this select Soil</option>
+          <option value="Red Soil">Red Soil</option>
+          <option value="Black Soil">Black Soil</option>
+          <option value="Silt Soil">Silt Soil</option>
+        </select>
+        <p>SurveyNo:</p>
+        <input type='text' class="land" placeholder="Enter SurveyNo" formControlName="surveyno">
+        <p>Amount/year:</p>
+        <input type='number' class="land" placeholder="Enter Amount" formControlName="amount">
+        <p> District:</p>
+        <input type='text' class="land" placeholder="Enter District" formControlName="district">
+        <p>Image:</p>
+        <input type='file' (change)="onSelectImg($event)" class="land file">
+        <img src={{this.cartform.value.img}} alt="you Selected img" width="100px" height="100px">
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" (click)="GiveLand()">Submit</button>
+        <button type="button" class="btn btn-danger" (click)="updatePopup('none')">Close</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- --------------------------- About Me-------------------------->
+
+<div class="container">
+  <div class="row">
+     <h1>Land you Give</h1>
+       <div class="col-md-3" *ngFor=" let i of getdata">
+        <div class="box">
+          <div class="card" style="width: 18rem;" >
+              <img src="../../assets/images/{{i.img}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{i.username | uppercase}}</h5>
+                <div class="card-text">
+                  <p>AREA: {{i.area}} Acres</p>
+                  <p>SOIL: {{i.soil}}</p>
+                  <p>DISTRICT: {{i.district}}</p>
+                  <p>₹: {{i.amount}} / Year</p> 
+                  <p>registerd: {{i.registered}}</p> 
+
+                 </div>
+              </div> 
+              </div> 
+            </div>
+      </div>
+  </div>
+</div>
+
+
+<!-- --------------------------- You Applyed -------------------------->
+
+<div class="container">
+  <div class="row">
+     <h1>Land you Registerd</h1>
+       <div class="col-md-3" *ngFor=" let i of getRegData">
+        <div class="box">
+          <div class="card" style="width: 18rem;" >
+              <img src="../../assets/images/{{i.img}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{i.username | uppercase}}</h5>
+                <div class="card-text">
+                  <p>AREA: {{i.area}} Acres</p>
+                  <p>SOIL: {{i.soil}}</p>
+                  <p>DISTRICT: {{i.district}}</p>
+                  <p>₹: {{i.amount}} / Year</p> 
+                  <p>registerd: {{i.registered}}</p> 
+                 </div>
+                <button class="btn btn-danger"  (click)="updatedata(i.surveyno)">Reject</button>               
+              </div> 
+              </div> 
+            </div>
+      </div>
+  </div>
+</div>
+
+<!-- --------------------contact----------------------------- -->
+<div id="contact">
+  <div class="container">
+    <div class="row">
+      <div class="contact-left">
+        <h1 class="sub-title">Frequently Asked Questions</h1>
+        <div class="que-box">
+          <p class="question">
+            How long does it take to sell my car?
+          </p>
+          <p>
+            It only takes 10 minutes to answer the questions /self car evaluation and get a final offer. Once you have
+            accepted the offer, we'll pick your car from your home and transfer the amount to your bank account within
+            24 hours.
+          </p>
+          <hr>
+          <p class="question">
+            How long does it take to sell my car?
+          </p>
+          <p>
+            It only takes 10 minutes to answer the questions /self car evaluation and get a final offer. Once you have
+            accepted the offer, we'll pick your car from your home and transfer the amount to your bank account within
+            24 hours.
+          </p>
+          <hr>
+          <p class="question">
+            How long does it take to sell my car?
+          </p>
+          <p>
+            It only takes 10 minutes to answer the questions /self car evaluation and get a final offer. Once you have
+            accepted the offer, we'll pick your car from your home and transfer the amount to your bank account within
+            24 hours.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

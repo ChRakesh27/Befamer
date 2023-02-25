@@ -1,0 +1,63 @@
+<!-- Section: Design Block -->
+<section class="background-radial-gradient overflow-hidden">
+  <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+    <div class="row gx-lg-5 align-items-center mb-5">
+      <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
+        <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
+          The BE FARMER <br />
+          <span style="color: hsl(218, 81%, 75%)">for your business</span>
+        </h1>
+        <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+          Temporibus, expedita iusto veniam atque, magni tempora mollitia
+          dolorum consequatur nulla, neque debitis eos reprehenderit quasi
+          ab ipsum nisi dolorem modi. Quos?
+        </p>
+      </div>
+      <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
+        <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
+        <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
+
+        <div class="form-box">
+          <div class="Login" [ngStyle]="{display:loginDisplay}">
+
+            <div class="button-box">
+              <div id="btn" [ngStyle]="{left:btnLeft}"></div>
+              <button type="button" class="toggle-btn" (click)="loginbtn('0px','50px','450px')">LOG IN</button>
+              <button type="button" class="toggle-btn" (click)="loginbtn('110px','450px','50px')">Register</button>
+            </div>
+
+ 
+            <form id="login" class="input-group" [ngStyle]="{left:loginLeft}">
+              <input type="text" class="input-field" placeholder="Email Id / UserName" (input)="emailId($event)" />
+              <input type="text" class="input-field" placeholder="Enter password" (input)="password($event)" /><br />
+              <button type="submit" class="submit-btn" (click)="login()">login</button>
+            </form>
+            <form [formGroup]="userform" (ngSubmit)="register()" id="register" class="input-group" [ngStyle]="{left:registerLeft}">
+              <input type="text" class="input-field" placeholder="Enter userName" formControlName="username" />
+              <input type="number" class="input-field" placeholder="Enter Phone No" formControlName="phone" />
+              <input type="text" class="input-field" placeholder="Enter Email Id" formControlName="email" />
+              <input type="text" class="input-field" placeholder="Enter password" formControlName="password"/>
+              
+            <input type='file' (change)="onSelectImg($event)" class="land file">
+              <img src={{file}} width="100px" height="100px">
+
+              <button type="submit" class="submit-btn" >register</button>
+            </form>
+          </div>
+
+          <div class="logout" [ngStyle]="{display:logoutDisplay}" >
+            <img src={{userform.value.profileImg}}>
+            <h1>{{UserName}}</h1>
+            <h1>{{Email}}</h1>
+            <h1>{{phoneNo}}</h1>
+            <button type="submit" class="submit-btn" (click)="logout()">Logout</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- Section: Design Block -->

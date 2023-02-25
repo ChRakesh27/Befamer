@@ -1,0 +1,190 @@
+
+
+
+ .header-text{
+    margin-top: 20%;
+    font-size: 30px;
+}
+.header-text h1{
+    font-size: 50px;
+    margin-top: 20px;
+    color: #001eff;
+}
+
+
+.highlighted-text {
+        color: rgb(11, 200, 11);
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-top: -57px;
+        margin-right: 15px;
+        margin-left: 300px;
+        cursor: pointer;
+    }
+
+    .ball {
+        animation: spring 2s;
+        animation-timing-function: ease;
+    }
+
+    @keyframes spring {
+        0% {
+            transform: scale(1) translateY(0);
+             color:rgb(79, 244, 194);
+        }
+
+        10% {
+            transform: scale(1.2, 0.7);
+            color: purple;
+        }
+
+        30% {
+            transform: scale(0.9, 1.1) translateY(-10px);
+            color:red;
+        }
+        
+        50% {
+            transform: scale(1) translateY(0);
+            color:yellow;
+        }
+
+        100% {
+            transform: translateY(0);
+        }
+    }
+
+    .ball:hover {
+        animation: move-text 0.75s forwards;
+        color:red;
+    }
+
+    .profile-role-tagline {
+        font-size: 19px;
+        font-family: "Poppins Light";
+      }
+
+
+/* ------------Prortfolio----------------- --> */
+#portfolio{
+    padding: 50px, 0;
+}
+
+.work-list{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 40px;
+    margin-top: 50px;
+}
+.work{
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+.work img{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    display: block;
+    transition: transform 0.5s;
+}
+
+.layer{
+    width: 100%;
+    height: 0;
+    background: linear-gradient(rgba(0,0,0,0.6),#ff004f);
+    border-radius: 10px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    text-align: center;
+    font-size: 14px;
+    transition: height 0.5s;
+}
+
+
+.layer h3{
+    font-weight: 300;
+    margin-bottom: 20px;
+}
+.work:hover img{
+    transform: scale(1.1);
+}
+.work:hover .layer{
+    height: 100%;
+}
+.btn{
+    display: block;
+    margin: 50px auto;
+    width: fit-content;
+    border: 1px solid #ff004f;
+    padding: 14px 50px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #fff;
+    transition: background 0.5s;
+}
+.btn:hover{
+    background: #ff004f;
+}
+
+/* -------------contact-------------- --> */
+
+.contact-left{
+    flex-basis: 35%;
+}
+.card-img-top{
+width: 100%;
+height: 200px;
+}
+.contact-right{
+    flex-basis: 60%;
+}
+.contact-left p{
+    margin-top: 30px;
+}
+.btn.btn2{
+    display: inline-block;
+    background: #ff004f;
+}
+form input, form textarea{
+    width: 100%;
+    border: 0;
+    outline: none;
+    background: #262626;
+    padding: 15px;
+    margin: 15px 0;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 6px;
+    
+}
+form .btn2{
+    padding: 14px 60px;
+font-size: 18px;
+margin-top: 20px;
+cursor: pointer;
+}
+
+ .card {
+    background: rgba(231, 209, 209, 0.268);
+}
+.col-md-3 .btn{
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.about:hover .card{
+   background: #ff004f;
+}
+.row h1{
+    color: #ff004f;
+}
+.row h5{
+    color: rgb(2, 255, 31);
+}
