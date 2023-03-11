@@ -8,14 +8,26 @@ import { Observable } from 'rxjs';
 export class ServicesService {
   BASEURL = "http://localhost:3000/api";
   isloged=false;
+  selectItem:any;
   constructor(private _http: HttpClient) { }
-
-  getAllData(table: any): Observable<any> {
-    const apiurl = this.BASEURL + '/getUsers/' + table;
+  setItem(data:any) {
+    this.selectItem =data;
+  }
+  getItem(){
+    return this.selectItem;
+  }
+  getAllLand(id:any): Observable<any> { 
+    const apiurl = this.BASEURL + '/getAllLand/' + id;
     return this._http.get(apiurl);
   }
-  getAllLand(): Observable<any> {
-    const apiurl = this.BASEURL + '/getAllLand/';
+
+  getDeleteLand(id:any): Observable<any> { 
+    const apiurl = this.BASEURL + '/getDeleteLand/' + id;
+    return this._http.delete(apiurl);
+  }
+  
+  getUnRegLand(id:any): Observable<any> { 
+    const apiurl = this.BASEURL + '/getUnRegLand/'+ id;
     return this._http.get(apiurl);
   }
 
@@ -28,5 +40,14 @@ export class ServicesService {
     return this._http.put(apiurl, data);
   }
 
+  LoginDel(emailid:any, password:any): Observable<any> {
+    const apiurl = this.BASEURL + '/isloged/'+ emailid + '/'+password ;
+    return this._http.get(apiurl);
+ }
 
+ LoginUpdate(data :any): Observable <any> {
+  const apiurl = this.BASEURL +'/updateLogin';
+  return this._http.put(apiurl, data)
+ }
 }
+ 

@@ -1,7 +1,5 @@
-
 import { Component, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { EventEmitter } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ServicesService } from '../services.service';
 
 @Component({
@@ -9,53 +7,44 @@ import { ServicesService } from '../services.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
 
   constructor(private service: ServicesService) { }
-
 
   logoutDisplay: any = 'none';
   loginDisplay: any = 'block';
   btnLeft: any = "0px";
   loginLeft: any = "50px";
   registerLeft: any = "450px";
+  edit: any = true;
   Email: any = '';
   Password: any = '';
-  getdata: any = {};
-  isValid: any = false;
   UserName: any;
   phoneNo: any;
   userform: any;
-  islogin: any;
+  userLogin: any;
   file: any;
 
   ngOnInit(): void {
     this.userform = new FormGroup({
-      username: new FormControl(''),
-      phone: new FormControl(),
-      email: new FormControl(''),
-      password: new FormControl(''),
+      id: new FormControl(''),
+      username: new FormControl('', Validators.required),
+      phone: new FormControl(Validators.required),
+      email: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required),
       profileImg: new FormControl('../../assets/images/login.jpg')
     })
 
-
-    //------------------ Getting data ----------------------------------
-
-    this.service.getAllData('login').subscribe((res) => {
-      this.getdata = res.data;
+    this.userLogin = new FormGroup({
+      email: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required),
     })
 
-    let abc: any = localStorage.getItem('loged');
-
-    if (abc !== null) {
-      this.loginLeft = "450px";
-      this.registerLeft = "450px";
-      this.loginDisplay = 'none';
-      this.logoutDisplay = 'block';
-      this.islogin = JSON.parse(abc);
-      this.UserName = this.islogin.username;
-      this.phoneNo = this.islogin.phone;
-      this.Email = this.islogin.email;
+    let isLoggedIn: any = localStorage.getItem('loged');
+    if (!!isLoggedIn) {
+      let islogin = JSON.parse(isLoggedIn);
+      this.login(islogin.email, islogin.password);
     }
 
   }
@@ -70,14 +59,7 @@ export class LoginComponent implements OnInit {
     //   }
     // }
     this.file = e.target.files ? e.target.files[0] : '';
-    console.log("🚀 ~ file", this.file.name)
-
-  }
-  emailId(eventData: any) {
-    this.Email = eventData.target.value;
-  }
-  password(eventData: any) {
-    this.Password = eventData.target.value;
+    // console.log("🚀 ~ file", this.file.name)
   }
 
   loginbtn(btnLeft: any, loginLeft: any, registerLeft: any) {
@@ -88,44 +70,64 @@ export class LoginComponent implements OnInit {
 
   //------------------  when u " login btn "----------------------------------
 
-  login() {
-
-    for (let i of this.getdata) {
-      if ((i.email == this.Email || i.username == this.Email) && i.password == this.Password) {
-        let data = { username: i.username, email: i.email, phone: i.phone, password: i.password };
-
+  login(email: any, password: any) {
+    this.service.LoginDel(email, password).subscribe((res) => {
+      if (res.data[0] !== undefined) {
+        let data = { id: res.data[0].id, username: res.data[0].username, email: res.data[0].email, phone: res.data[0].phone, password: res.data[0].password };
         localStorage.setItem("loged", JSON.stringify(data));
         this.loginLeft = "450px";
         this.registerLeft = "450px";
         this.loginDisplay = 'none';
         this.logoutDisplay = 'block';
-        this.UserName = i.username;
-        this.phoneNo = i.phone;
-        this.Email = i.email;
-
+        this.UserName = res.data[0].username;
+        this.Email = res.data[0].email;
+        this.phoneNo = res.data[0].phone;
       }
-    }
+    })
   }
+
   //------------------ when u " register btn "----------------------------------
 
   register() {
-
-    if (this.userform.value.userName != '' && this.userform.value.phone != 0 && this.userform.value.email.endsWith("@gmail.com") && this.userform.value.password != '') {
-      let data = { username: this.UserName, email: this.Email, phone: this.phoneNo, password: this.password };
-      localStorage.setItem("loged", JSON.stringify(data));
+    if (this.userform.value.email.endsWith("@gmail.com")) {
       this.service.createData(this.userform.value, 'login').subscribe((res) => {
-        this.loginLeft = "450px";
-        this.registerLeft = "450px";
-        this.loginDisplay = 'none';
-        this.logoutDisplay = 'block';
-        this.UserName = this.userform.value.username;
-        this.phoneNo = this.userform.value.phone;
-        this.Email = this.userform.value.email;
+        this.login(this.userform.value.email, this.userform.value.password);
       });
     }
   }
-  //------------------  when u " logout btn "----------------------------------
 
+  updateLogin() {
+    this.service.LoginUpdate(this.userform.value).subscribe((res) => {
+      this.login(res.data[0].email, res.data[0].password);
+    })
+  }
+
+  editMode(data: any) {
+    let isLoggedIn: any = localStorage.getItem('loged');
+    let islogin = JSON.parse(isLoggedIn);
+
+    this.userform = new FormGroup({
+      id: new FormControl(islogin.id),
+      username: new FormControl(islogin.username, Validators.required),
+      phone: new FormControl(islogin.phone, Validators.required),
+      email: new FormControl(islogin.email, Validators.required),
+      password: new FormControl(islogin.password, Validators.required),
+      profileImg: new FormControl('../../assets/images/login.jpg')
+    })
+
+    if (data) {
+      this.registerLeft = "450px";
+      this.loginDisplay = 'none';
+      this.logoutDisplay = 'block';
+    } else {
+      this.edit = false;
+      this.registerLeft = '50px';
+      this.loginDisplay = 'block';
+      this.logoutDisplay = 'none';
+    }
+  }
+
+  //------------------  when u " logout btn "----------------------------------
 
   logout() {
     localStorage.removeItem("loged");
@@ -137,15 +139,9 @@ export class LoginComponent implements OnInit {
     this.phoneNo = '';
     this.Email = '';
     this.userform.reset();
+    this.userLogin.reset();
 
   }
 
 
-
-
-
 }
-function output() {
-  throw new Error('Function not implemented.');
-}
-

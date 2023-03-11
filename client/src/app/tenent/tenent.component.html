@@ -30,7 +30,8 @@
   <div class="row">
     <h1>About Us</h1>
     <div class="col-md-3 about">
-      <div class="card" style="width: 18rem;">
+      <div class="card">
+
         <img src="../../assets/images/pic3.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">user name 1</h5>
@@ -40,7 +41,7 @@
       </div>
     </div>
     <div class="col-md-3 about">
-      <div class="card" style="width: 18rem;">
+      <div class="card">
         <img src="../../assets/images/pic3.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">user name 2</h5>
@@ -51,7 +52,7 @@
       </div>
     </div>
     <div class="col-md-3 about">
-      <div class="card" style="width: 18rem;">
+      <div class="card">
         <img src="../../assets/images/pic3.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">user name 3</h5>
@@ -62,7 +63,7 @@
       </div>
     </div>
     <div class="col-md-3 about">
-      <div class="card" style="width: 18rem;">
+      <div class="card">
         <img src="../../assets/images/pic3.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">user name 4</h5>
@@ -78,30 +79,21 @@
   <div class="row">
     <h1>Featured Lands</h1>
     <div class="col-md-3" *ngFor=" let i of getdata">
-      
-        <div class="card" style="width: 18rem;">
-          <img src="../../assets/images/{{i.img}}" class="card-img-top">
-          <div class="card-body">
-            <h5 class="card-title">{{i.username | uppercase}}</h5>
-            <div class="card-text">
-              <p>AREA: {{i.area}} Acres</p>
-              <p>SOIL: {{i.soil}}</p>
-              <p>DISTRICT: {{i.district}}</p>
-              <p>₹: {{i.amount}} / Year</p>
-            </div>
-            
-            <button class="btn btn-primary" *ngIf=islogedin; else="notloged" (click)="updatedata(i.surveyno)" >Apply</button>
-            <ng-template #notloged>
-
-              <button class="btn btn-primary" disabled>Apply</button>
-            </ng-template>
-
-          
+      <div class="card">
+        <img src="../../assets/images/{{i.img}}" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title">{{i.username | uppercase}}</h5>
+          <div class="card-text">
+            <p>AREA: {{i.area}} Acres</p>
+            <p>SOIL: {{i.soil}}</p>
+            <p>DISTRICT: {{i.district}}</p>
+            <p>₹: {{i.amount}} / Year</p> 
+          </div>
+          <button class="btn btn-primary"  routerLink="/view" routerLinkActive="active" (click)="selItem(i)">View</button>
         </div>
       </div>
     </div>
     <button type="button" class="btn" routerLink="/cart" routerLinkActive="active">View All Lands</button>
-    <!-- <a href="#" class="btn">View All Lands</a> -->
   </div>
 </div>
 
@@ -117,7 +109,7 @@
         <p>Our team is ready to answer any questions you have about Land</p>
         <h3> chipparakesh27@gmail.com </h3>
 
-        <p> <span> +91 6303396201 </span> <br> Speak with one of our customer support executive</p>
+        <p> <span> +91 1234567890 </span> <br> Speak with one of our customer support executive</p>
 
         <p><span> View FAQs </span><br> Find answers to frequently asked questions</p>
 

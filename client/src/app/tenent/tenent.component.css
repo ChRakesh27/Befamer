@@ -1,7 +1,4 @@
-
-
-
- .header-text{
+.header-text{
     margin-top: 20%;
     font-size: 30px;
 }
@@ -116,7 +113,7 @@
 .work:hover img{
     transform: scale(1.1);
 }
-.work:hover .layer{
+.work:hover .layer{ 
     height: 100%;
 }
 .btn{
@@ -134,7 +131,7 @@
     background: #ff004f;
 }
 
-/* -------------contact-------------- --> */
+
 
 .contact-left{
     flex-basis: 35%;

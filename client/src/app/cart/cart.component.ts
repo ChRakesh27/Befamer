@@ -8,44 +8,23 @@ import { ServicesService } from '../services.service';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
+
+  constructor(private service: ServicesService) { }
+
   getdata: any = [];
-  Email: any;
-  islogedin: boolean = false;
-  constructor(private service: ServicesService) {
-  }
-
+  id: any;
   ngOnInit(): void {
-    
- //------------------ Getting data ----------------------------------
-    this.service.getAllLand().subscribe((res) => {
-      for (let i of res.data) {
-        if (i.isavailable == true && i.email!==this.Email) {
-          this.getdata.push(i);
-        }
-      }
+   
+
+    //------------------ Getting data ----------------------------------
+    this.service.getUnRegLand(this.id).subscribe((res) => {
+      this.getdata = res.data;
     })
-    let abc: any = localStorage.getItem('loged');
-    if (abc !== null) {
-      this.islogedin = true
-      let islogin = JSON.parse(abc);
-      this.Email = islogin.email;
 
-    }
   }
-  userform = new FormGroup({
-    isavailable: new FormControl(),
-    registered: new FormControl(),
-    surveyno: new FormControl(),
 
-  })
-
- //------------------ Updating the land when u " apply "---------------------------------- 
-  updatedata(data: any) {
-    this.getdata = this.getdata.filter((element:any ) =>{return element.surveyno!==data})
-    this.userform.value.surveyno = data;
-    this.userform.value.isavailable = false;
-    this.userform.value.registered = this.Email;  
-    this.service.updateLand(this.userform.value).subscribe((res) => { })
-    this.userform.reset();
+  selItem(data:any){
+    this.service.setItem(data);
   }
 }
+ 

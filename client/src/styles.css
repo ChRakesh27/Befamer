@@ -43,6 +43,7 @@ color: #fff;
 .card {
     background: rgba(231, 209, 209, 0.268);
     margin-top: 50px;
+    width: 100%;
 }
 .col-md-3 .btn{
     margin-bottom: 10px;

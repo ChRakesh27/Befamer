@@ -1,0 +1,39 @@
+<div class="container py-4 my-4 mx-auto d-flex flex-column">
+    <div class="header">
+        <div class="row r1">
+            <div class="col-md-9 abc">
+                <h1>BE FARMER</h1> 
+            </div>
+            <button type="button" class="btn-close" routerLink="/tenent" aria-label="Close"></button>
+        </div>
+    </div>
+    <div class="container-body mt-4">
+        <div class="row r3">
+           <div class="col-md-8"> <img src= "../../assets/images/{{selectItem?.img}}" width="100%" height="100%"> </div>
+            <div class="col-md-4 p-0 klo">
+                <ul>
+                    <li> Name:<span>{{selectItem?.username}}</span></li>
+                    <li>Area:<span>{{selectItem?.area}} </span></li>
+                    <li>Soil:<span> {{selectItem?.soil}}</span></li>
+                    <li>Survey No:<span> {{selectItem?.surveyno}}</span></li>
+                    <li>District:<span>{{selectItem?.district}}</span></li>
+                    <li>Amount:<span>{{selectItem?.amount}} </span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer d-flex flex-column mt-5">
+        <div class="row r4">
+            <div class="col-md-2 myt  offset-md-4"><button type="button" class="btn" routerLink="/tenent">ADD TO CART</button></div>
+            <div class="col-md-2 myt ">
+                <ng-container *ngIf="islogedin; else elseTemplate">
+                    <button class="btn btn-primary" (click)="updatedata(selectItem?.surveyno)" routerLink="/landlord">apply</button>
+                </ng-container>
+                <ng-template #elseTemplate>
+                    <button class="btn btn-primary" routerLink="/login">apply</button>
+                </ng-template>
+            </div>
+           
+        </div>
+    </div>
+</div>

@@ -4,6 +4,7 @@ import { CartComponent } from './cart/cart.component';
 import { LandlordComponent } from './landlord/landlord.component';
 import { LoginComponent } from './login/login.component';
 import { TenentComponent } from './tenent/tenent.component';
+import { ViewItemComponent } from './view-item/view-item.component';
 
 const routes: Routes = [
   {path:"", component: TenentComponent},
@@ -11,7 +12,7 @@ const routes: Routes = [
   {path:"tenent", component: TenentComponent},
   {path:"landlord", component: LandlordComponent},
   {path:"cart", component: CartComponent},
-
+  {path:"view", component:ViewItemComponent}
 ];
 
 @NgModule({

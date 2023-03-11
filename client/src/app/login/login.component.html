@@ -21,36 +21,50 @@
         <div class="form-box">
           <div class="Login" [ngStyle]="{display:loginDisplay}">
 
-            <div class="button-box">
-              <div id="btn" [ngStyle]="{left:btnLeft}"></div>
-              <button type="button" class="toggle-btn" (click)="loginbtn('0px','50px','450px')">LOG IN</button>
-              <button type="button" class="toggle-btn" (click)="loginbtn('110px','450px','50px')">Register</button>
-            </div>
+            <ng-container *ngIf="edit; else elseTemplate">
+              <div class="button-box">
+                <div id="btn" [ngStyle]="{left:btnLeft}"></div>
+                <button type="button" class="toggle-btn" (click)="loginbtn('0px','50px','450px')">LOG IN</button>
+                <button type="button" class="toggle-btn" (click)="loginbtn('110px','450px','50px')">Register</button>
 
- 
-            <form id="login" class="input-group" [ngStyle]="{left:loginLeft}">
-              <input type="text" class="input-field" placeholder="Email Id / UserName" (input)="emailId($event)" />
-              <input type="text" class="input-field" placeholder="Enter password" (input)="password($event)" /><br />
-              <button type="submit" class="submit-btn" (click)="login()">login</button>
+              </div>
+            </ng-container>
+            <ng-template #elseTemplate>
+              <h1 class="userUpdate">Update</h1>
+            </ng-template>
+
+
+            <form [formGroup]="userLogin" id="login" class="input-group" [ngStyle]="{left:loginLeft}">
+              <input type="text" class="input-field" placeholder="Email Id / UserName" formControlName="email" />
+              <input type="text" class="input-field" placeholder="Enter password" formControlName="password" /><br />
+              <button type="submit" class="submit-btn"
+                (click)="login(userLogin.value.email,  userLogin.value.password)">login</button>
             </form>
-            <form [formGroup]="userform" (ngSubmit)="register()" id="register" class="input-group" [ngStyle]="{left:registerLeft}">
+            <form [formGroup]="userform" id="register" class="input-group" [ngStyle]="{left:registerLeft}">
               <input type="text" class="input-field" placeholder="Enter userName" formControlName="username" />
               <input type="number" class="input-field" placeholder="Enter Phone No" formControlName="phone" />
               <input type="text" class="input-field" placeholder="Enter Email Id" formControlName="email" />
-              <input type="text" class="input-field" placeholder="Enter password" formControlName="password"/>
-              
-            <input type='file' (change)="onSelectImg($event)" class="land file">
-              <img src={{file}} width="100px" height="100px">
+              <input type="text" class="input-field" placeholder="Enter password" formControlName="password" />
 
-              <button type="submit" class="submit-btn" >register</button>
+              <!-- <input type='file' (change)="onSelectImg($event)" class="land file">
+              <img src={{file}} width="100px" height="100px"> -->
+              <ng-container *ngIf="edit; else elsebtn">
+                <button type="submit" class="submit-btn" (click)="register()">register</button>
+              </ng-container>
+              <ng-template #elsebtn>
+                <button type="submit" class="upd-btn" (click)="updateLogin()">Update</button>
+                <button type="submit" class="upd-btn" (click)="editMode(true)">Cancel</button>
+              </ng-template>
             </form>
           </div>
 
-          <div class="logout" [ngStyle]="{display:logoutDisplay}" >
+          <div class="logout" [ngStyle]="{display:logoutDisplay}">
             <img src={{userform.value.profileImg}}>
             <h1>{{UserName}}</h1>
             <h1>{{Email}}</h1>
             <h1>{{phoneNo}}</h1>
+            <button class="submit-btn" (click)="editMode(false)">Edit</button>
+            <br>
             <button type="submit" class="submit-btn" (click)="logout()">Logout</button>
           </div>
         </div>

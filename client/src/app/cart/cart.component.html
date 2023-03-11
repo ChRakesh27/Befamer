@@ -3,7 +3,7 @@
        <h1>Featured Lands</h1>
          <div class="col-md-3" *ngFor=" let i of getdata">
           <div class="box" *ngIf= i.isavailable >
-            <div class="card" style="width: 18rem;" >
+            <div class="card">
                 <img src="../../assets/images/{{i.img}}" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h5 class="card-title">{{i.username | uppercase}}</h5>
@@ -13,12 +13,7 @@
                     <p>DISTRICT: {{i.district}}</p>
                     <p>₹: {{i.amount}} / Year</p>       
                    </div>
-                  <button class="btn btn-primary" *ngIf=islogedin; else="notloged" (click)="updatedata(i.surveyno)">apply</button>
-                  <ng-template #notloged>
-                    <button class="btn btn-primary" disabled>apply</button>
-
-                  </ng-template>
-                  
+                  <button class="btn btn-primary" routerLink="/view" routerLinkActive="active" (click)="selItem(i)">View</button> 
                 </div> 
                 </div> 
               </div>

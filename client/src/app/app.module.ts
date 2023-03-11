@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServicesService } from './services.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CartComponent } from './cart/cart.component';
+import { ViewItemComponent } from './view-item/view-item.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { CartComponent } from './cart/cart.component';
     LandlordComponent,
     TenentComponent,
     CartComponent,
+    ViewItemComponent,
   ],
   imports: [
     BrowserModule,

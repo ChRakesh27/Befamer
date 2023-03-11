@@ -8,40 +8,43 @@ import { ServicesService } from '../services.service';
   styleUrls: ['./tenent.component.css']
 })
 export class TenentComponent implements OnInit {
+
+  constructor(private service: ServicesService) {
+  }
+
   getdata: any = [];
   islogedin: any = false;
   Email: any;
-  abc: any = localStorage.getItem('loged');
-  constructor(private service: ServicesService) {
+  id:any;
+  logDel: any = localStorage.getItem('loged');
 
-  }
+  islogin = JSON.parse(this.logDel);
 
-  ngOnInit(): void {
-
-    //------------------getting data ----------------------------------
-
-    this.service.getAllLand().subscribe((res) => {
-      let i = 0;
-      while (this.getdata.length < 4) {
-        if (this.Email !== undefined && res.data[i].email !== this.Email) {
-          this.getdata.push(res.data[i]);
-        }
-        i++;
-      }
-
-    })
-    if (this.abc !== null) {
-      this.islogedin = true;
-      let islogin = JSON.parse(this.abc);
-      this.Email = islogin.email;
-    }
-  }
   userform = new FormGroup({
     isavailable: new FormControl(),
     registered: new FormControl(),
     surveyno: new FormControl(),
 
   })
+  
+
+  ngOnInit(): void {
+
+    if (this.logDel !== null) {
+      this.islogedin = true;
+      this.Email = this.islogin.email;
+      this.id = this.islogin.id;
+    }
+    // getting land data
+
+    this.service.getUnRegLand(this.id).subscribe((res) => {
+      this.getdata = res.data.filter((ele:any, ind:any) => ind < 4);
+      })
+      
+      
+    }
+
+ 
   //------------------ Updating the land when u " apply "----------------------------------
 
   updatedata(data: any) {
@@ -49,7 +52,12 @@ export class TenentComponent implements OnInit {
     this.userform.value.surveyno = data;
     this.userform.value.isavailable = false;
     this.userform.value.registered = this.Email;
-    this.service.updateLand(this.userform.value).subscribe((res) => { })
-    this.userform.reset();
+    this.service.updateLand(this.userform.value).subscribe((res) => {
+      this.userform.reset();
+     })
+    
+  }
+  selItem(data:any){
+    this.service.setItem(data);
   }
 }

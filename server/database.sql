@@ -1,15 +1,18 @@
 CREATE DATABASE befarmer;
 use befarmer;
 CREATE TABLE login(
+  id varchar(36) not Null,
   username VARCHAR(20) NOT NULL,
   phone int NOT NULL,
   email VARCHAR(20) NOT NULL,
   password VARCHAR(10) NOT NULL,
-  primary key(email) 
+  profileImg varchar(226) NOT NULL,
+  primary key(id),
+  UNIQUE (email)
 );
 
 CREATE TABLE land(
-	 email varchar(20) not null,
+	 id varchar(36) not null,
      area varchar(10) not null,
 	soil varchar(20) not null,
 	surveyno varchar(10) not null,	
@@ -19,16 +22,19 @@ CREATE TABLE land(
      isavailable boolean default true,
      registered varchar(20) default "None",
      primary key(surveyno),
-     foreign key (email) references login(email) on delete cascade
+     foreign key (id) references login(id) on delete cascade
 );
 
-insert into land (email,area,soil,surveyno,amount,district,img) values('r','200','red','142345',5000,'sircilla','l1.jpg'),('s','100','black','1342556',5000,'hyd','l2.jpg'),('v','300','red','235466',5000,'siddipet','l3.jpg');
+insert into land (id,area,soil,surveyno,amount,district,img) values('af964553-d059-494f-a41c-b071f36afb66','200','red','15576345',5000,'sircilla','l1.jpg'),('660793a9-81ca-40ee-b58c-146c6b3bfde2','100','black','4556',5000,'hyd','l2.jpg'),('b52b16d6-bcb7-11ed-a0f8-c200b798d254','300','red','247666',5000,'siddipet','l3.jpg'),('b278d9d2-6cc0-4745-8a32-45515100c42b','100','black','451156',5000,'hyd','l2.jpg');
+insert into land (id,area,soil,surveyno,amount,district,img) values('af964553-d059-494f-a41c-b071f36afb66','300','black','565',7000,'hyd','l2.jpg');
 
-insert into land (email,area,soil,surveyno,amount,district,img,isavailable) values('r','200','red',"1456",5000,'sircilla','l2.jpg',false),('v','300','red',"1256",5000,'siddipet','l4.jpg',false);
-
+select * from login;
 select * from land;
+
+drop table login;
 drop table land;
-select land.*, login.* from land, login where login.email=land.email and ;
-INSERT INTO login (username, phone, email, password) VALUES ('srikanth',1234567890, 's','s');
+INSERT INTO login (id,username, phone, email, password, profileImg) VALUES ( uuid() ,'Rakesh',1234567890, 'ra','r','dsfadf');
 UPDATE land SET registered='a', isavailable=false  WHERE surveyno='1342556';
-SELECT * FROM login;
+SELECT * FROM login where id='c4647a3f-b8fe-11ed-b487-a04b96108f9b';
+select ld.*, u.username from land ld, login u where u.id=ld.id;
+select uuid()

@@ -1,79 +1,76 @@
-#LandLord{
-    text-align: center;
+#LandLord {
+  text-align: center;
 }
-.question{
-    color: red;
+.question {
+  color: red;
 }
-.header-text{
-    margin-top: 30px;
+.header-text {
+  margin-top: 30px;
 }
-.que-box{
-margin: 30px 40px;
+.que-box {
+  margin: 30px 40px;
 }
-.landBtn{
-    color: #fff;
-    padding: 10px 30px;
-    margin-top: 50px;
-    background: #0009;
-    border: none;
-    border-radius: 30px;
-cursor: pointer;
+.landBtn {
+  color: #fff;
+  padding: 10px 30px;
+  margin-top: 50px;
+  background: #0009;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
 }
-.landBtn:hover{
-    background: #000;
-
+.landBtn:hover {
+  background: #000;
 }
-.modal-content{
-    background-color: hsl(219, 65%, 19%);
-    color: red;
-    border: 2px solid greenyellow;
-    margin-top: 100px;
-    
-  }
-  .land{
-    
-    color:white;
-    display: flex;
-    flex-wrap: wrap;
-    margin-left: 30px;
-  }
-
-.modal-body p{
-    margin-top: 9px;
-
+.modal-content {
+  background-color: hsl(219, 65%, 19%);
+  color: red;
+  border: 2px solid greenyellow;
+  margin-top: 100px;
 }
-.modal-body input, .form-select {
-    background: transparent;
-    color: #fff;
-    border: none;
-    border-bottom: 2px solid white;
-    height:30px ;
-    width: 80%;
-}
-.form-select{
- margin-left: 30px;
-}
-option{
-    background: hsl(219, 65%, 19%);
-}
-.btn{
-    display: block;
-    margin: 20px auto 10px;
-    width: fit-content;
-    border: 1px solid #ff004f;
-    padding: 14px 50px;
-    border-radius: 6px;
-    text-decoration: none;
-    color: #fff;
-    transition: background 0.5s;
-}
-.btn:hover{
-    background: #ff004f;
+.land {
+  color: white;
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 30px;
 }
 
-.username{
-    padding-bottom: 20px;
-    text-align: end;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    color: rgb(244, 249, 243);
+.modal-body p {
+  margin-top: 9px;
+}
+.modal-body input,
+.form-select {
+  background: transparent;
+  color: #fff;
+  border: none;
+  border-bottom: 2px solid white;
+  height: 30px;
+  width: 80%;
+}
+.form-select {
+  margin-left: 30px;
+}
+option {
+  background: hsl(219, 65%, 19%);
+}
+.btn {
+  display: block;
+  margin: 20px auto 10px;
+  width: fit-content;
+  border: 1px solid #ff004f;
+  padding: 14px 50px;
+  border-radius: 6px;
+  text-decoration: none;
+  color: #fff;
+  transition: background 0.5s;
+}
+.btn:hover {
+  background: #ff004f;
+}
+
+.username {
+  padding-bottom: 20px;
+  text-align: end;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: rgb(244, 249, 243);
 }

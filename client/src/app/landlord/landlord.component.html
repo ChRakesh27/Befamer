@@ -20,37 +20,37 @@
 <!-- ------------------------ Modal Box ------------------------- -->
 <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
   <div class="modal-dialog" role="document">
-    
+
     <div class="modal-content">
-      <form [formGroup]="cartform">
-      <div class="modal-header">
-         <h4 class="modal-title">Land:</h4>
+      <form [formGroup]="cartform" (ngSubmit)="onSubmitLandInfo()">
+        <div class="modal-header">
+          <h4 class="modal-title">Land:</h4>
         </div>
-      <div class="modal-body">
-        <p>Acre:</p>
-        <input type='text' class="land" placeholder="Enter Acre " formControlName="area">
-        <p>Soil(Type):</p>
-        <select class="form-select" aria-label="Default select example" formControlName="soil">
-          <option selected>Open this select Soil</option>
-          <option value="Red Soil">Red Soil</option>
-          <option value="Black Soil">Black Soil</option>
-          <option value="Silt Soil">Silt Soil</option>
-        </select>
-        <p>SurveyNo:</p>
-        <input type='text' class="land" placeholder="Enter SurveyNo" formControlName="surveyno">
-        <p>Amount/year:</p>
-        <input type='number' class="land" placeholder="Enter Amount" formControlName="amount">
-        <p> District:</p>
-        <input type='text' class="land" placeholder="Enter District" formControlName="district">
-        <p>Image:</p>
-        <input type='file' (change)="onSelectImg($event)" class="land file">
-        <img src={{this.cartform.value.img}} alt="you Selected img" width="100px" height="100px">
-      </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-primary" (click)="GiveLand()">Submit</button>
-        <button type="button" class="btn btn-danger" (click)="updatePopup('none')">Close</button>
-      </div>
-    </form>
+        <div class="modal-body">
+          <p>Acre:</p>
+          <input type='number' class="land" placeholder="Enter Acre " formControlName="area" required>
+          <p>Soil(Type):</p>
+          <select class="form-select" aria-label="Default select example" formControlName="soil" required>
+            <option value="" disabled selected>Open this select Soil</option>
+            <option value="Red Soil">Red Soil</option>
+            <option value="Black Soil">Black Soil</option>
+            <option value="Silt Soil">Silt Soil</option>
+          </select>
+          <p>SurveyNo:</p>
+          <input type='text' class="land" placeholder="Enter SurveyNo" formControlName="surveyno" required>
+          <p>Amount/year:</p>
+          <input type='number' class="land" placeholder="Enter Amount" formControlName="amount" required>
+          <p> District:</p>
+          <input type='text' class="land" placeholder="Enter District" formControlName="district" required>
+          <p>Image:</p>
+          <input type='file' (change)="onSelectImg($event)" class="land file">
+          <img src={{imageBase64}} alt="you Selected img" width="100px" height="100px" required>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="button" class="btn btn-danger" (click)="updatePopup('none')">Close</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
@@ -60,25 +60,25 @@
 
 <div class="container">
   <div class="row">
-     <h1>Land you Give</h1>
-       <div class="col-md-3" *ngFor=" let i of getdata">
-        <div class="box">
-          <div class="card" style="width: 18rem;" >
-              <img src="../../assets/images/{{i.img}}" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">{{i.username | uppercase}}</h5>
-                <div class="card-text">
-                  <p>AREA: {{i.area}} Acres</p>
-                  <p>SOIL: {{i.soil}}</p>
-                  <p>DISTRICT: {{i.district}}</p>
-                  <p>₹: {{i.amount}} / Year</p> 
-                  <p>registerd: {{i.registered}}</p> 
-
-                 </div>
-              </div> 
-              </div> 
+    <h1>Land you Give</h1>
+    <div class="col-md-3" *ngFor=" let i of getdata">
+      <div class="box">
+        <div class="card">
+          <img src="../../assets/images/{{i.img}}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">{{i.username | uppercase}}</h5>
+            <div class="card-text">
+              <p>AREA: {{i.area}} Acres</p>
+              <p>SOIL: {{i.soil}}</p>
+              <p>DISTRICT: {{i.district}}</p>
+              <p>₹: {{i.amount}} / Year</p>
+              <p>registerd: {{i.registered}}</p>
             </div>
+            <button class="btn btn-dark" (click)="onRemoveLand(i.surveyno)">Remove</button>
+          </div>
+        </div>
       </div>
+    </div>
   </div>
 </div>
 
@@ -87,25 +87,25 @@
 
 <div class="container">
   <div class="row">
-     <h1>Land you Registerd</h1>
-       <div class="col-md-3" *ngFor=" let i of getRegData">
-        <div class="box">
-          <div class="card" style="width: 18rem;" >
-              <img src="../../assets/images/{{i.img}}" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">{{i.username | uppercase}}</h5>
-                <div class="card-text">
-                  <p>AREA: {{i.area}} Acres</p>
-                  <p>SOIL: {{i.soil}}</p>
-                  <p>DISTRICT: {{i.district}}</p>
-                  <p>₹: {{i.amount}} / Year</p> 
-                  <p>registerd: {{i.registered}}</p> 
-                 </div>
-                <button class="btn btn-danger"  (click)="updatedata(i.surveyno)">Reject</button>               
-              </div> 
-              </div> 
+    <h1>Land you Registerd</h1>
+    <div class="col-md-3" *ngFor=" let i of getRegData">
+      <div class="box">
+        <div class="card">
+          <img src="../../assets/images/{{i.img}}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">{{i.username | uppercase}}</h5>
+            <div class="card-text">
+              <p>AREA: {{i.area}} Acres</p>
+              <p>SOIL: {{i.soil}}</p>
+              <p>DISTRICT: {{i.district}}</p>
+              <p>₹: {{i.amount}} / Year</p>
+              <p>registerd: {{i.registered}}</p>
             </div>
+            <button class="btn btn-danger" (click)="LandReject(i.surveyno)">Reject</button>
+          </div>
+        </div>
       </div>
+    </div>
   </div>
 </div>
 
